@@ -1,0 +1,54 @@
+server:
+  port: 9001
+spring:
+  datasource:
+    username: root
+    password: 123456
+    url: jdbc:mysql://localhost:3306/dentalclinic?characterEncoding=UTF8
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    #druid 连接池的配置 可以是默认的
+    druid:
+      filters: stat
+      initial-size: 10
+      max-active: 20
+      min-idle: 8
+      web-stat-filter:
+        session-stat-enable: true
+        session-stat-max-count: 100000
+      filter:
+        wall:
+          log-violation: true
+  redis:
+    host: localhost
+    port: 6379
+    password: 123456
+  rabbitmq:
+    host: localhost
+    username: guest
+    password: guest
+#Sms
+aliyun:
+  sms:
+    accessKeyId: *
+    accessKeySecret: *
+    template_code: *
+    sign_name: 程序员之家
+
+#mybatis配置
+mybatis:
+  mapper-locations: classpath:mapping/*Mapper.xml
+  type-aliases-package: com.dentalclinic.pojo
+
+#jwt配置
+jwt:
+  config:
+    key: dentalclinic
+    ttl: 3600000 #过期时间一小时
+
+#showSql
+logging:
+  level:
+    com:
+      dentalclinic:
+        mapper : debug
